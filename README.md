@@ -1,50 +1,190 @@
-# Wikipedia Page View Forecasting for AdEase
+# Multi-Language Wikipedia Pageview Forecasting  
+### *A Comparative Time Series Modeling Case Study for Advertising & Content Optimization*
 
-## Project Overview
-AdEase is a digital advertising company leveraging AI to help businesses maximize engagement at minimal cost. Its ad infrastructure relies on three core AI modules – **Design, Dispense, and Decipher** – to deliver effective and economical advertising solutions.  
+This project is a **detailed multi-language time series case study** conducted on **1,145 Wikipedia pages across 8 languages**, designed to identify the **best-performing pages (by pageviews)** for advertising companies and content strategy teams.  
 
-This project focuses on **analyzing and forecasting Wikipedia page views** to optimize ad placements across regions and languages. The dataset comprises **145,000 Wikipedia pages with daily view counts spanning 550 days**.  
-
-The ultimate goal is to build reliable time series models that anticipate user engagement, enabling AdEase to **strategically position advertisements where they are most impactful**.  
+It focuses on **English language modeling in depth**, followed by a **generalized forecasting pipeline** applied to all remaining languages to evaluate and compare performance using **MAPE**.  
 
 ---
 
-## Project Goals
-1. **Analyze historical page view patterns** across multiple Wikipedia pages.  
-2. **Perform time series preprocessing** to prepare data for forecasting.  
-3. **Forecast future page views** to anticipate engagement levels.  
-4. **Segment results by language and region** to align with client targeting strategies.  
-5. Provide actionable insights to **optimize ad placements** and maximize ROI for clients.  
+## 📌 Project Overview
+
+Advertising companies frequently need to understand:
+- **Which pages receive the highest consistent traffic?**
+- **How predictable are the views?**
+- **Which languages or regions offer stable, high-quality ad inventory?**
+
+This project answers these questions by:
+1. **Exploring & decomposing pageview time series**
+2. **Building multiple forecasting models**  
+   (ARIMA, SARIMA, SARIMAX with exogenous features, Prophet with regressors)
+3. **Evaluating accuracy using MAPE**
+4. **Applying a scalable forecasting pipeline across languages**
+5. **Comparing results to recommend the best-performing languages/pages**
 
 ---
 
-## Work Completed (Ongoing)
-- **Data Analysis & Preprocessing**  
-  - Explored daily page views for 145,000 Wikipedia pages.  
-  - Conducted **stationarity checks** using the Dickey-Fuller test.  
-  - Performed **time series decomposition** and **differencing** to remove trends and seasonality.  
-  - Used **ACF/PACF analysis** to identify autoregressive and moving average components.  
+## 🔍 Detailed Workflow
 
-- **Forecasting Models**  
-  - Built and deployed **ARIMA**, **SARIMAX**, and **Facebook Prophet** models.  
-  - Generated per-page view forecasts across languages and regions.  
-  - Produced insights to guide **ad placement strategies**, targeting high-engagement periods and pages.  
+### **1. Exploratory Analysis on English Pages**
+The English dataset is used as the "base language" for deep exploration:
+- Data structure review  
+- Handling missing values  
+- Understanding page name patterns (title, access type, agent, language split)  
+- Visualizing page trends  
+- Identifying seasonality, anomalies, and traffic patterns  
 
 ---
 
-## Next Steps
-- Incorporate **exogenous factors** such as holidays or major events into models.  
-- Enhance forecasting accuracy with **hybrid and ensemble approaches**.  
-- Develop an **interactive dashboard** for stakeholders to visualize predicted page views and optimize ad placements in real-time.  
+### **2. Stationarity Checks**
+To prepare the data for ARIMA-based methods:
+- Augmented Dickey–Fuller (ADF) test  
+- Trend/seasonality decomposition  
+- Differencing until stationarity is achieved  
+- ACF and PACF plotting for parameter identification  
+
+This ensures robust model performance.
 
 ---
 
-## Tools & Libraries
-- Python: `pandas`, `numpy`, `statsmodels`, `fbprophet`, `matplotlib`, `seaborn`  
-- Time Series Analysis: ARIMA, SARIMAX, Prophet  
-- Data Visualization: matplotlib, seaborn  
+## 🏗️ **3. Forecasting Models Built on the English Dataset (Full End-to-End Modeling)**
+
+The English section is modeled **in full depth** using **all four forecasting families**, including exogenous variables where applicable:
+
+### **✓ ARIMA**
+- Baseline non-seasonal forecasting  
+- Applied after achieving stationarity  
+
+### **✓ SARIMA**
+- Captures both seasonal & trend-based patterns  
+- Parameterized using stationarity diagnostics  
+
+### **✓ SARIMAX (with Exogenous Variables)**
+➡️ **Used only for English**, not for other languages.  
+English dataset includes signals that serve as **exogenous regressors** (e.g., page type, agent characteristics, access patterns).  
+SARIMAX captures external influence on pageviews, improving forecast accuracy.
+
+### **✓ Prophet (with Regressors)**
+- Handles yearly/weekly seasonality  
+- Extended with exogenous factors for richer modeling  
+- Again, this enhanced Prophet setup is **used only for English**
+
+Each model produces:
+- Forecasts  
+- Diagnostic plots  
+- MAPE-based evaluation  
+- Comparative summary  
+
+This expanded modeling makes the English section the foundational reference for all other languages.
 
 ---
 
-## Status
-**Ongoing:** Initial analysis and forecasting models have been implemented. Future iterations will focus on improving accuracy and providing actionable insights for multilingual and regional ad targeting.
+## 🔄 **4. Multi-Language Forecasting Pipeline**
+
+A modular forecasting pipeline is created to **automatically run the core modeling steps for any language**:
+
+For each of the 7 remaining languages:
+- Prepare language-specific pageview dataset  
+- Check stationarity and perform decomposition  
+- Generate ACF/PACF plots  
+- Train ARIMA, SARIMA, Prophet models *(without exogenous regressors)*  
+- Compute MAPE  
+- Store results for final comparison  
+
+This enables **uniform, reliable forecasting across all languages**.
+
+---
+
+## 📊 **5. Final Comparison & Recommendations**
+
+After running the pipeline:
+- MAPE scores are consolidated for all languages  
+- Language-level differences in predictability are analyzed  
+- Pages/languages with the most stable and high-traffic patterns are recommended  
+
+The results guide advertisers on:
+- Where ad placement would yield higher impressions  
+- Which languages offer the best traffic predictability  
+- What content categories are most attractive  
+
+---
+
+## 🧠 Strategic Insights & Real-World Impact
+
+### **How This Pipeline Helps Ad Companies**
+- Identify **pages with steady, high audience reach**  
+- Plan advertising based on forecasted traffic trends  
+- Allocate budgets across languages/regions with higher predictability  
+- Optimize campaign ROI using stable pageview patterns  
+
+---
+
+## 🌍 Applications Across Industries
+
+The methodology is adaptable to many domains:
+
+### **📱 Digital Media**
+- Page engagement prediction  
+- Editorial content planning  
+- Traffic surge forecasting  
+
+### **🛒 E-Commerce**
+- Predicting visits to product categories  
+- Seasonal sales forecasting  
+- Optimizing promotional schedules  
+
+### **🏦 BFSI**
+- Forecasting website visits to product/service pages  
+- Lead/traffic conversion analytics  
+
+### **🚚 Supply Chain**
+- Predicting helpdesk / API traffic  
+- Estimating service requests  
+
+### **Ad-Tech & Marketing**
+- Channel performance forecasting  
+- Inventory planning for ad placements  
+- Predicting reach for multi-language campaigns  
+
+---
+
+## 🚀 Future Enhancements
+
+### **1. Advanced Parameter Search**
+- Bayesian optimization  
+- Genetic algorithms  
+- Auto-ARIMA & Auto-Prophet  
+
+### **2. Full Pipeline Deployment**
+- Containerized service (Docker)  
+- API-based forecasting endpoints  
+- Real-time retraining  
+
+### **3. Deep Learning-Based Forecasting**
+- LSTM / GRU networks  
+- Temporal Convolutional Networks  
+- DeepAR / N-BEATS for multi-series modeling  
+
+### **4. Exogenous Feature Expansion**
+- Social trends  
+- News events  
+- Holidays & campaign periods  
+
+### **5. Model Tracking**
+- MLflow experiment logging  
+- Versioned models for each language  
+
+---
+
+## 📎 Summary
+
+This case study delivers:
+- A **deep modeling exploration** for the English language using ARIMA, SARIMA, SARIMAX, and Prophet with exogenous variables  
+- A **multi-language pipeline** for scalable forecasting across 7 additional languages  
+- A **MAPE-based comparison** of forecasting performance  
+- Actionable **recommendations for advertisers and digital strategists**  
+- A highly adaptable forecasting framework for **industry-wide usage**  
+
+It demonstrates how multi-series time series forecasting can guide **content strategy, ad optimization, and cross-language planning** using a scalable, interpretable pipeline.
+
+---
